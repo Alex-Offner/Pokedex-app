@@ -1,0 +1,66 @@
+@font-face {
+  font-Family: pokemonFont;
+  src: url(pokemon.ttf)
+}
+body {
+  line-height: 150%;
+  text-align: center;
+}
+
+h1 {
+  text-align: center;
+  margin: 1% 1% 3% 1%;
+  padding: 1%;
+  font-family: 'pokemonFont', sans-serif;
+  font-size: 300%;
+}
+h1 span {
+  border: 30px solid #ff0000;
+  background-color: #ff0000;
+  border-color: #ff0000;
+  border-width: medium;
+}
+
+p {
+  font-size: 130%;
+}
+
+ul {
+list-style: none;
+display: flex;
+flex-direction: column;
+justify-content: center;
+}
+
+.pokemonList {
+
+}
+
+.pokemonButton {
+  padding: 0.5%;
+  margin: 1%;
+  text-align: center;
+  cursor: pointer;
+}
+
+.pokemonGrass {
+  background-color: #d8f9ce;
+  padding: 0.5%;
+  margin: 1%;
+}
+.pokemonFire {
+  background-color: #d4650b;
+  padding: 0.5%;
+  margin: 1%;
+}
+.pokemonWater {
+  background-color: #97a5e2;
+  padding: 0.5%;
+  margin: 1%;
+}
+
+.pokemonBug {
+  background-color: #4b930b;
+  padding: 0.5%;
+  margin: 1%;
+}
