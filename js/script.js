@@ -56,7 +56,7 @@ showDetails function */
 function addListenerToButton (button, pokemon) {
   button.addEventListener('click', function(event) {
     loadDetails(pokemon).then(function () {
-    showModal(pokemon.name, pokemon.height, pokemon.type1, pokemon.type2, pokemon.imageUrl);
+    showModal(pokemon);
     //showDetails(pokemon);
     });
   });
@@ -103,14 +103,18 @@ function loadDetails(item) {
   }).then(function (details) {
     item.imageUrl = details.sprites.front_default;
     item.height = details.height;
-    item.type1 = details.types[0].type.name;
-    item.type2 = details.types[1].type.name;
+    let types = [];
+    details.types.forEach(function(detailsType) {
+      types.push(detailsType.type.name)
+    });
+    item.types = types.join(', ');
   }).catch(function (e) {
     console.error(e);
   });
 }
 
-function showModal(title, text, text2, text3, img) {
+//Using object destructuring here, to access keys better in line 59 (showModal(pokemon))
+function showModal({name, height, types, imageUrl}=pokemon) {
   let modalContainer = document.querySelector('#modal-container');
   modalContainer.innerHTML = '';
   let modal = document.createElement('div');
@@ -121,26 +125,22 @@ function showModal(title, text, text2, text3, img) {
   closeButtonElement.innerText = 'Close';
   closeButtonElement.addEventListener('click', hideModal);
 
-  let titleElement = document.createElement ('h2');
-  titleElement.innerText = title;
+  let nameElement = document.createElement ('h2');
+  nameElement.innerText = name;
 
-  let contentElement = document.createElement('p');
-  contentElement.innerText = 'height: ' + text;
+  let hightElement = document.createElement('p');
+  hightElement.innerText = 'height: ' + height;
 
-  let contentElement2 = document.createElement('p');
-  if (text3 === undefined) {
-    contentElement2.innerText = 'types: ' + text2
-  } else {
-    contentElement2.innerText = 'types: ' + text2 +', ' + text3;
-  }
+  let typeElement = document.createElement('p');
+  typeElement.innerText = 'types: ' + types;
 
   let imgElement = document.createElement('img');
-  imgElement.src = img;
+  imgElement.src = imageUrl;
 
   modal.appendChild(closeButtonElement);
-  modal.appendChild(titleElement);
-  modal.appendChild(contentElement);
-  modal.appendChild(contentElement2);
+  modal.appendChild(nameElement);
+  modal.appendChild(hightElement);
+  modal.appendChild(typeElement);
   modal.appendChild(imgElement);
   modalContainer.appendChild(modal);
 
