@@ -191,3 +191,14 @@ pokemonRepository.loadList().then(function() {
 });
 
 pokemonRepository.searchBar();
+
+let body = document.querySelector('.check');
+let hamburgerButton = document.querySelector('.navbar-toggler');
+
+hamburgerButton.addEventListener('click', function (event) {
+  if(body.classList.contains('navbar-extend')) {
+    body.classList.remove('navbar-extend');
+  } else {
+    body.classList.add('navbar-extend');
+  }
+});
