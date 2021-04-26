@@ -1,0 +1,52 @@
+body {
+  line-height: 150%;
+  margin-top: 65px;
+}
+
+h1 {
+  text-align: center;
+  margin: 1% 1% 1% 1%;
+  padding: 1%;
+  padding-left: 3%;
+  font-family: 'pokemonFont', sans-serif;
+  font-size: 300%;
+}
+
+p {
+  font-size: 130%;
+}
+
+
+.loadingMessage {
+  font-weight: bold;
+  text-align: center;
+}
+
+.modal-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.list-group-item {
+  font-size: 130%;
+  padding: 1%;
+  margin: 1%;
+  text-align: center;
+  border-style: none;
+}
+
+.navbar-brand {
+  font-size: 150%;
+}
+.navbar-nav {
+  margin-left: auto;
+}
+
+.navbar-extend {
+  margin-top: 100px;
+}
+
+.not-searched {
+  display: none;
+}

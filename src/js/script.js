@@ -12,21 +12,14 @@ let pokemonRepository = (function() {
     ) {
       pokemonList.push(pokemon);
     } else {
+      /* eslint-disable no-console */
       console.log('The data you want to push is not an object or is missing a required key like name, height, types or number');
+      /* eslint-enable no-console */
     }
   }
 
   function getAll() {
     return pokemonList;
-  }
-
-  //This function searches pokemon by name and shows their object in the array
-  function search(pokemon) {
-    if (pokemonList.find(item => item.name === pokemon)) {
-      console.log(pokemonList.filter(item => item.name.includes(pokemon)));
-    } else {
-      console.log(pokemon + ' does not exists');
-    }
   }
 
   /*The following functions create buttons in the element with the bootstrap classes and attributes to call the modal */
@@ -44,17 +37,10 @@ let pokemonRepository = (function() {
     pokeList.appendChild(listPokemon);
   }
 
-
-  //This functions shows pokemon in console if called
-  function showDetails(pokemon) {
-    loadDetails(pokemon).then(function() {
-      console.log(pokemon);
-    });
-  }
   /*This function adds an EventListener to an object called button and calls
   showDetails function */
   function addListenerToButton(button, pokemon) {
-    button.addEventListener('click', function(event) {
+    button.addEventListener('click', function() {
       loadDetails(pokemon).then(function() {
         showModal(pokemon);
         //showDetails(pokemon);
@@ -94,7 +80,9 @@ let pokemonRepository = (function() {
         add(pokemon);
       });
     }).catch(function(e) {
+      /* eslint-disable no-console */
       console.error(e);
+      /* eslint-enable no-console */
       hideLoadingMessage();
     })
   }
@@ -113,9 +101,12 @@ let pokemonRepository = (function() {
       });
       item.types = types.join(', ');
     }).catch(function(e) {
+      /* eslint-disable no-console */
       console.error(e);
+      /* eslint-enable no-console */
     });
   }
+
   /*This function creats elements and adds them to the modal
   Using object destructuring here, to access keys better in line 59 (showModal(pokemon)) */
   function showModal({
@@ -123,11 +114,11 @@ let pokemonRepository = (function() {
     height,
     types,
     imageUrl
+    /* eslint-disable no-undef */
   } = pokemon) {
-    let modalContainer = document.querySelector('.modal');
+    /* eslint-enable no-undef */
     let modalBody = document.querySelector('.modal-body');
     let modalTitle = document.querySelector('.modal-title');
-    let modalHeader = document.querySelector('.modal-header');
 
     //Use this to empty HTML of modal everytime before it is called
     modalTitle.innerHTML = '';
@@ -144,7 +135,7 @@ let pokemonRepository = (function() {
 
     let imgElement = document.createElement('img');
     imgElement.classList.add('modal-img');
-    imgElement.style.width = "50%";
+    imgElement.style.width = '50%';
     imgElement.src = imageUrl;
 
     modalTitle.appendChild(nameElement);
@@ -176,7 +167,6 @@ let pokemonRepository = (function() {
     add: add,
     getAll: getAll,
     addPokemon: addPokemon,
-    search: search,
     loadList: loadList,
     loadDetails: loadDetails,
     searchBar: searchBar
@@ -195,7 +185,7 @@ pokemonRepository.searchBar();
 let body = document.querySelector('.check');
 let hamburgerButton = document.querySelector('.navbar-toggler');
 
-hamburgerButton.addEventListener('click', function (event) {
+hamburgerButton.addEventListener('click', function () {
   if(body.classList.contains('navbar-extend')) {
     body.classList.remove('navbar-extend');
   } else {
