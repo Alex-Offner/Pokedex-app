@@ -6,14 +6,17 @@ let pokemonRepository = (function() {
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
   function add(pokemon) {
-    if (typeof pokemon === 'object' &&
+    if (
+      typeof pokemon === 'object' &&
       'name' in pokemon &&
       'detailsUrl' in pokemon
     ) {
       pokemonList.push(pokemon);
     } else {
       /* eslint-disable no-console */
-      console.log('The data you want to push is not an object or is missing a required key like name, height, types or number');
+      console.log(
+        'The data you want to push is not an object or is missing a required key like name, height, types or number'
+      );
       /* eslint-enable no-console */
     }
   }
@@ -59,8 +62,7 @@ let pokemonRepository = (function() {
 
   //This function hides the loading message again
   function hideLoadingMessage() {
-    let removableMessage =
-      document.querySelector('.remove');
+    let removableMessage = document.querySelector('.remove');
     document.querySelector('.loadingMessage').removeChild(removableMessage);
   }
 
@@ -68,55 +70,54 @@ let pokemonRepository = (function() {
   Then it calls the add pokemon function and catches any errors occuring*/
   function loadList() {
     showLoadingMessage();
-    return fetch(apiUrl).then(function(response) {
-      return response.json();
-    }).then(function(json) {
-      hideLoadingMessage();
-      json.results.forEach(function(item) {
-        let pokemon = {
-          name: item.name,
-          detailsUrl: item.url
-        };
-        add(pokemon);
+    return fetch(apiUrl)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(json) {
+        hideLoadingMessage();
+        json.results.forEach(function(item) {
+          let pokemon = {
+            name: item.name,
+            detailsUrl: item.url
+          };
+          add(pokemon);
+        });
+      })
+      .catch(function(e) {
+        /* eslint-disable no-console */
+        console.error(e);
+        /* eslint-enable no-console */
+        hideLoadingMessage();
       });
-    }).catch(function(e) {
-      /* eslint-disable no-console */
-      console.error(e);
-      /* eslint-enable no-console */
-      hideLoadingMessage();
-    })
   }
 
   //This function fetches more details from the json (height, imgUrl, types )
   function loadDetails(item) {
     let url = item.detailsUrl;
-    return fetch(url).then(function(response) {
-      return response.json();
-    }).then(function(details) {
-      item.imageUrl = details.sprites.front_default;
-      item.height = details.height;
-      let types = [];
-      details.types.forEach(function(detailsType) {
-        types.push(detailsType.type.name)
+    return fetch(url)
+      .then(function(response) {
+        return response.json();
+      })
+      .then(function(details) {
+        item.imageUrl = details.sprites.front_default;
+        item.height = details.height;
+        let types = [];
+        details.types.forEach(function(detailsType) {
+          types.push(detailsType.type.name);
+        });
+        item.types = types.join(', ');
+      })
+      .catch(function(e) {
+        /* eslint-disable no-console */
+        console.error(e);
+        /* eslint-enable no-console */
       });
-      item.types = types.join(', ');
-    }).catch(function(e) {
-      /* eslint-disable no-console */
-      console.error(e);
-      /* eslint-enable no-console */
-    });
   }
 
   /*This function creats elements and adds them to the modal
   Using object destructuring here, to access keys better in line 59 (showModal(pokemon)) */
-  function showModal({
-    name,
-    height,
-    types,
-    imageUrl
-    /* eslint-disable no-undef */
-  } = pokemon) {
-    /* eslint-enable no-undef */
+  function showModal({ name, height, types, imageUrl } = pokemon) {
     let modalBody = document.querySelector('.modal-body');
     let modalTitle = document.querySelector('.modal-title');
 
@@ -142,18 +143,17 @@ let pokemonRepository = (function() {
     modalBody.appendChild(hightElement);
     modalBody.appendChild(typeElement);
     modalBody.appendChild(imgElement);
-
   }
 
   /*This function adds display: "none" to the HTML elements with the "list-group-item" class, if they don't include the string in the searchBar */
   function searchBar() {
     let searchBar = document.getElementById('searchBar');
 
-    searchBar.addEventListener('keyup', (e) => {
+    searchBar.addEventListener('keyup', e => {
       let searchString = e.target.value.toLowerCase();
       let pokemonOnHTML = document.querySelectorAll('.list-group-item');
 
-      pokemonOnHTML.forEach((searchedPokemon) => {
+      pokemonOnHTML.forEach(searchedPokemon => {
         if (searchedPokemon.innerText.indexOf(searchString) > -1) {
           searchedPokemon.style.display = '';
         } else {
@@ -185,8 +185,8 @@ pokemonRepository.searchBar();
 let body = document.querySelector('.check');
 let hamburgerButton = document.querySelector('.navbar-toggler');
 
-hamburgerButton.addEventListener('click', function () {
-  if(body.classList.contains('navbar-extend')) {
+hamburgerButton.addEventListener('click', function() {
+  if (body.classList.contains('navbar-extend')) {
     body.classList.remove('navbar-extend');
   } else {
     body.classList.add('navbar-extend');

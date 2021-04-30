@@ -8,5 +8,12 @@
     ],
     "rules": {
         "quotes": ["error", "single"]
+        "prefer-destructuring": ["error", {
+        "array": true,
+        "object": true
+    }, {
+        "enforceForRenamedProperties": false
+    }]
     }
 }
+s
