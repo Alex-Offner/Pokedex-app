@@ -1,4 +1,8 @@
-#This simple App uses an external API to list a number of pokemon and show more details of them like pictures, names and heights. A search bar will help sort the pokemon by name. It is written in JavaScript, CSS and HTML.
+# Pokédex App
+
+This simple App uses an external API to list a number of pokemon and show more details of them like pictures, names and heights. A search bar will help sort the pokemon by name. It is written in JavaScript, CSS and HTML.
+
+![Image of the Pokédex App](src/img/Pokedex app.PNG)
 
 External API: https://pokeapi.co
 
