@@ -2,7 +2,7 @@
 
 This simple App uses an external API to list a number of pokemon and show more details of them like pictures, names and heights. A search bar will help sort the pokemon by name. It is written in JavaScript, CSS and HTML.
 
-![Pokedex app](https://user-images.githubusercontent.com/80695644/116727739-cf6c3e00-a999-11eb-910f-01257b91421c.PNG)
+![](src/img/pokedex.gif)
 
 # Link to live version on GitHub pages
 
