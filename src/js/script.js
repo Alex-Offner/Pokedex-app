@@ -1,7 +1,7 @@
 /*This IIFE (Immediately Invoked Functional Expression) holds a pokemonList and multible functions; it is only globaly accessible
 by calling pokemonRepository */
 
-let pokemonRepository = (function() {
+let pokemonRepository = (function () {
   let pokemonList = [];
   let apiUrl = 'https://pokeapi.co/api/v2/pokemon/?limit=150';
 
@@ -43,8 +43,8 @@ let pokemonRepository = (function() {
   /*This function adds an EventListener to an object called button and calls
   showDetails function */
   function addListenerToButton(button, pokemon) {
-    button.addEventListener('click', function() {
-      loadDetails(pokemon).then(function() {
+    button.addEventListener('click', function () {
+      loadDetails(pokemon).then(function () {
         showModal(pokemon);
         //showDetails(pokemon);
       });
@@ -71,12 +71,12 @@ let pokemonRepository = (function() {
   function loadList() {
     showLoadingMessage();
     return fetch(apiUrl)
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(json) {
+      .then(function (json) {
         hideLoadingMessage();
-        json.results.forEach(function(item) {
+        json.results.forEach(function (item) {
           let pokemon = {
             name: item.name,
             detailsUrl: item.url
@@ -84,7 +84,7 @@ let pokemonRepository = (function() {
           add(pokemon);
         });
       })
-      .catch(function(e) {
+      .catch(function (e) {
         /* eslint-disable no-console */
         console.error(e);
         /* eslint-enable no-console */
@@ -96,26 +96,26 @@ let pokemonRepository = (function() {
   function loadDetails(item) {
     let url = item.detailsUrl;
     return fetch(url)
-      .then(function(response) {
+      .then(function (response) {
         return response.json();
       })
-      .then(function(details) {
+      .then(function (details) {
         item.imageUrl = details.sprites.front_default;
         item.height = details.height;
         let types = [];
-        details.types.forEach(function(detailsType) {
+        details.types.forEach(function (detailsType) {
           types.push(detailsType.type.name);
         });
         item.types = types.join(', ');
       })
-      .catch(function(e) {
+      .catch(function (e) {
         /* eslint-disable no-console */
         console.error(e);
         /* eslint-enable no-console */
       });
   }
 
-  /*This function creats elements and adds them to the modal
+  /*This function creats elements and adds them to the modal, test, test
   Using object destructuring here, to access keys better in line 59 (showModal(pokemon)) */
   function showModal({ name, height, types, imageUrl } = pokemon) {
     let modalBody = document.querySelector('.modal-body');
@@ -174,8 +174,8 @@ let pokemonRepository = (function() {
 })();
 
 /*This function adds each pokemon to the repository, and puts all of them in the pokemonList (through the getAll function). The the list is loaded into the HTML document */
-pokemonRepository.loadList().then(function() {
-  pokemonRepository.getAll().forEach(function(pokemon) {
+pokemonRepository.loadList().then(function () {
+  pokemonRepository.getAll().forEach(function (pokemon) {
     pokemonRepository.addPokemon(pokemon);
   });
 });
@@ -185,7 +185,7 @@ pokemonRepository.searchBar();
 let body = document.querySelector('.check');
 let hamburgerButton = document.querySelector('.navbar-toggler');
 
-hamburgerButton.addEventListener('click', function() {
+hamburgerButton.addEventListener('click', function () {
   if (body.classList.contains('navbar-extend')) {
     body.classList.remove('navbar-extend');
   } else {
